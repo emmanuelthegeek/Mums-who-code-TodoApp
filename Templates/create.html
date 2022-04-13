@@ -1,18 +1,43 @@
 {% load static %}
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- bootstrap 5 complete cdn -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" />
+    <!-- bootstrap 5 javascript cdn -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <title>Create A Task</title>
+    <!-- move css to the bottom to overide -->
+    <link rel="stylesheet" href="{% static  'style.css'  %}" />
 </head>
 
 <body>
+    <!-- align h1 to the center and also beautify it -->
 
-    <h1> Create A Task </h1>
-
+    <div class="alert alert-primary" role="alert">
+        <h1>Todo App</h1>
+        <a href="{%  url 'listtask' %}" class="text-white btn btn-success mx-auto text-decoration-none">
+        All task
+      </a>
+    </div>
+    <h4 class="text-center my-5 text-white">Create a new Task</h4>
+    <!-- output forms -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 mx-auto">
+                <form action="{% url 'createtask' %}" method="POST">
+                    {% csrf_token %} {{forms}}
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>

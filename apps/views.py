@@ -3,7 +3,7 @@ from django.shortcuts import render, get_object_or_404,redirect
 from django.views import generic
 from .models import TodoData
 from django.http import HttpResponseRedirect
-
+from .forms import *
 # Create your views here.
 #CRUD CREATE, READ, UPDATE, DELETE
 # read
@@ -15,9 +15,18 @@ def  ListTask(request):
 
 # create
 def  CreateTask(request):
-    name_of_task =request.POST['name_of_task']
-    TodoData.objects.create(name_of_task=name_of_task)
-    return render(request, 'create.html')
+    if request.method == 'POST':
+        forms = Todo_Task_form(request.POST)
+        if forms.is_valid():    
+            new_todo = forms.save(commit=False)
+            new_todo.save()
+            return redirect("listtask")
+        else:
+            forms = Todo_Task_form()
+    else:
+        forms = Todo_Task_form()
+        
+    return render(request, 'create.html', {'forms': forms})
 
 # delete
 def  DeleteTask(request, pk):
@@ -28,11 +37,16 @@ def  DeleteTask(request, pk):
 
 # update
 def  UpdateTask(request, pk):
-    TodoData = get_object_or_404(TodoData, pk=id)
-    isdone = request.POST.get('isdone', False)
-    if isdone == 'on':
-        isdone == True
-    TodoData.isdone = isdone
+    todoapp_in_question = TodoData.objects.get(pk = pk)
+    formUpdate = Todo_Task_form(request.POST, instance=todoapp_in_question)
 
-    TodoData.save()
-    return render(request, 'update.html')
+    
+    if request.method == "POST":
+        if formUpdate.is_valid():
+            formUpdate.save()
+            return redirect("home")
+        else:
+            
+            return render(request, "update.html", {formUpdate: "formUpdate"})
+    return render(request, "update.html", {"formUpdate": formUpdate})
+   
