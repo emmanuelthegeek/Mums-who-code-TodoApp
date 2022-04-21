@@ -1,3 +1,4 @@
+# models.py
 from django.db import models
 # import user model
 # first option for importing user model

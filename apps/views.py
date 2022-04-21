@@ -1,12 +1,16 @@
+# views.py 
 from asyncio import all_tasks
-from django.shortcuts import render, get_object_or_404,redirect
+from django.shortcuts import render, redirect
 from django.views import generic
 from .models import TodoData
 from django.http import HttpResponseRedirect
-from .forms import *
+from .forms import Todo_Task_form
 # Create your views here.
 #CRUD CREATE, READ, UPDATE, DELETE
+
+
 # read
+
 def  ListTask(request):
     context = {}
     all_tasks = TodoData.objects.all()
@@ -44,7 +48,7 @@ def  UpdateTask(request, pk):
     if request.method == "POST":
         if formUpdate.is_valid():
             formUpdate.save()
-            return redirect("home")
+            return redirect("/")
         else:
             
             return render(request, "update.html", {formUpdate: "formUpdate"})

@@ -1,3 +1,4 @@
+<!-- homepage.html -->
 {% load static %}
 <!DOCTYPE html>
 
@@ -54,7 +55,7 @@
                                         <td>{{ task.date_started }}</td>
                                         <td>{{ task.created_by }}</td>
                                         <td>
-                                            <a href="{% url 'updatetask' task.pk  %}" class="btn btn-primary m-2">
+                                            <a href="{% url 'updatetask' task.pk %}" class="btn btn-primary m-2">
                           Edit
                         </a>
                                             <a href="{% url 'deletetask'  task.pk  %}" class="btn btn-danger m-2">

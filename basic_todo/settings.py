@@ -1,4 +1,4 @@
-
+# settings.py
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -26,6 +26,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'crispy_forms',
     'apps',  # new application for todo list app 
 ]
 
@@ -59,6 +60,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'basic_todo.wsgi.application'
 
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
